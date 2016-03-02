@@ -1,0 +1,23 @@
+{
+  "name": "ewd-qoper8-gtm",
+  "version": "1.0.0",
+  "description": "Integrates the GT.M database with ewd-qoper8 worker processes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ewd-globals": "",
+    "nodem": ''
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robtweed/ewd-qoper8-gtm.git"
+  },
+  "author": "Rob Tweed, M/Gateway Developments Ltd",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/robtweed/ewd-qoper8-gtm/issues"
+  },
+  "homepage": "https://github.com/robtweed/ewd-qoper8-gtm#readme"
+}
