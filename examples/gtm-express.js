@@ -1,8 +1,7 @@
 /*
 
  ----------------------------------------------------------------------------
- | ewd-qoper8-gtm: Integrates the GT.M database with ewd-qoper8             |
- |                    worker modules                                        |
+ | ewd-qoper8: Node.js Queue and Multi-process Manager                      |
  |                                                                          |
  | Copyright (c) 2016 M/Gateway Developments Ltd,                           |
  | Reigate, Surrey UK.                                                      |
@@ -25,35 +24,28 @@
  |  limitations under the License.                                          |
  ----------------------------------------------------------------------------
 
+  1 March 2016
+
 */
 
-function connect(worker, environment) {
+var express = require('express');
+var bodyParser = require('body-parser');
+var qoper8 = require('ewd-qoper8');
+var app = express();
+app.use(bodyParser.json());
 
-  // establish the connection to GT.M database
+var q = new qoper8.masterProcess();
 
-  if (environment) {
-    var setEnvironment = require('./setEnvironment');
-    if (environment === true) {
-      setEnvironment();
-    }
-    else {
-      setEnvironment(environment);
-    }
-  }
-  var globals = require('ewd-globals');
-  var interface = require('nodem');
-  worker.db = new interface.Gtm();
-
-  var status = worker.db.open();
-
-  worker.on('stop', function() {
-    this.db.close();
-    worker.emit('dbClosed');
+app.post('/qoper8', function (req, res) {
+  q.handleMessage(req.body, function(response) {
+    res.send(response);
   });
+});
 
-  worker.emit('dbOpened', status);
-  worker.globalStore = new globals(worker.db);
-  worker.emit('globalStoreStarted');
-};
+q.on('started', function() {
+  this.worker.module = 'ewd-qoper8/lib/tests/gtm-module1';
+  app.listen(8080);
+});
 
-module.exports = connect;
+q.start();
+

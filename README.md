@@ -15,26 +15,75 @@ This module may be used to simplifiy the integration of the GT.M database with e
 ## Installing
 
        npm install ewd-qoper8-gtm
+
+You also MUST install the Node.js connection interface module for GT.M:
+
+       npm install nodem
 	   
 ## Using ewd-qoper8-gtm
 
 This module should be used with the start event handler of your ewd-qoper8 worker module, eg:
 
-    this.on('start', function(isFirst) {
-      var connectGTMTo = require('ewd-qoper8-gtm');
-      connectGTMTo(this);
-    });
+      this.on('start', function(isFirst) {
+        var connectGTMTo = require('ewd-qoper8-gtm');
+        connectGTMTo(this);
+      });
 
 This will open an in-process connection to a local GT.M database.
 
+### Setting the correct environment for GT.M
+
+You'll need to ensure that the correct environment variables have been created for GT.M.  Typically this is done
+automatically through the .profile file or similar.  If this is the case, simply establish the connection to GT.M
+as follows:
+
+      connectGTMTo(this);
+
+However, you can optionally establish the appropriate environment variables by using a built-in function within 
+ewd-qoper8-gtm which you can find within the repository.  Look for the module file /lib/setEnvironment.js
+
+You'll see that this will set up a default environment, based on the assumption that you used apt-get install fis-gtm 
+to install GT.M.  If this is how you installed GT.M, then there's a good chance that the default environment settings
+that the setEnvironment module will work for you.  You can choose to use and apply these default settings by
+establishing the connection to GT.M as follows:
+
+      connectGTMTo(this, true);
+
+If you need to modify any of the settings, you can do so by providing them within an object that you can pass to
+the connectGTMTo() function.  You can specify any or all of the following GT.M-specific environment variables:
+
+- gtmdir
+- gtmver
+- gtmdist
+- gtmgbldir
+- gtmroutines
+- GTMCI
+- GTM_REPLICATION  (defaults to 'off')
+
+Any variables that you don't explicity specify will have default values calculated for you.  Inspect the code in
+/lib/setEnvironment.js to see the rules and logic it applies to create these defaults.
+
+So, for example, you could do this:
+
+      var env = {
+        gtmdir: '/usr/lib/fis-gtm/V6.0-003_x86_64'
+      };
+      connectGTMTo(this, env);
+
+### What else does ewd-qoper8-gtm do?
+
 ewd-qoper8-gtm will load and initialise the ewd-globals module, creating a globalStore object within your worker.
 
-ewd-qoper8-gtm takes responsibility for handling the worker's 'stop' event, but provides you with 3 new events that you may handle:
+### Events emitted by ewd-qoper8-gtm
+
+ewd-qoper8-gtm uses the worker's 'stop' event to ensure that the connection to GT.M is removed before the worker stops.
+
+ewd-qoper8-gtm also emits 3 new events that you may handle:
 
 - dbOpened: fires after the connection to GT.M is opened within a worker process
 - dbClosed: fires after the connection to GT.M is closed within a worker process.  The worker exits immediately after this event
 - globalStoreStarted: fires after the globalStore object has been instantiated.  This is a good place to handle globalStore events, 
- for example to maintain global indices
+ for example to maintain global indices.
 
 The dbOpened event provides you with a single status object argument, allowing you to determine the success (or not) of
 opening the connection to GT.M, so you could add the following handler in your worker module, for example:
@@ -45,6 +94,15 @@ opening the connection to GT.M, so you could add the following handler in your w
 
 
 The dbClosed and globalStoreStarted events provide no arguments.
+
+## Example
+
+See in the /examples directory.
+
+gtm-express,js is an example Express / ewd-qoper8 master process scripts. gtm-module1.js is
+the associated worker module which connects to and uses GT.M, using the default environment settings.
+
+Use these as a starting point for your own system.
 
 
 ## License
