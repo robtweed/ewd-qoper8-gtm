@@ -1,14 +1,13 @@
 {
   "name": "ewd-qoper8-gtm",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Integrates the GT.M database with ewd-qoper8 worker processes",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "ewd-globals": "",
-    "nodem": ""
+    "ewd-document-store": ""
   },
   "repository": {
     "type": "git",

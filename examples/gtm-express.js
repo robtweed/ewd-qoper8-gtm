@@ -43,7 +43,7 @@ app.post('/qoper8', function (req, res) {
 });
 
 q.on('started', function() {
-  this.worker.module = 'ewd-qoper8/lib/tests/gtm-module1';
+  this.worker.module = 'ewd-qoper8-gtm/examples/gtm-module1';
   app.listen(8080);
 });
 

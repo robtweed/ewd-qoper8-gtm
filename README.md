@@ -10,7 +10,9 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 
 ## ewd-qoper8-gtm
 
-This module may be used to simplifiy the integration of the GT.M database with ewd-qoper8 worker process modules
+This module may be used to simplifiy the integration of the Open Source GT.M database with ewd-qoper8 worker process modules. 
+It additionally loads the ewd-document-store module to provide a very powerful and natural JavaScript interface to the underlying
+Global Storage database engine within GT.M.
 
 ## Installing
 
@@ -72,7 +74,7 @@ So, for example, you could do this:
 
 ### What else does ewd-qoper8-gtm do?
 
-ewd-qoper8-gtm will load and initialise the ewd-globals module, creating a globalStore object within your worker.
+ewd-qoper8-gtm will load and initialise the ewd-document-store module, creating a DocumentStore object within your worker.
 
 ### Events emitted by ewd-qoper8-gtm
 
@@ -82,8 +84,8 @@ ewd-qoper8-gtm also emits 3 new events that you may handle:
 
 - dbOpened: fires after the connection to GT.M is opened within a worker process
 - dbClosed: fires after the connection to GT.M is closed within a worker process.  The worker exits immediately after this event
-- globalStoreStarted: fires after the globalStore object has been instantiated.  This is a good place to handle globalStore events, 
- for example to maintain global indices.
+- DocumentStoreStarted: fires after the DocumentStore object has been instantiated.  This is a good place to handle DocumentStore events, 
+ for example to maintain document indices.
 
 The dbOpened event provides you with a single status object argument, allowing you to determine the success (or not) of
 opening the connection to GT.M, so you could add the following handler in your worker module, for example:
@@ -93,7 +95,7 @@ opening the connection to GT.M, so you could add the following handler in your w
     });
 
 
-The dbClosed and globalStoreStarted events provide no arguments.
+The dbClosed and DocumentStoreStarted events provide no arguments.
 
 ## Example
 

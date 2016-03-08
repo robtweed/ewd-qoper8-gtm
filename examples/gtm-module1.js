@@ -36,9 +36,12 @@ module.exports = function() {
 
   this.on('start', function(isFirst) {
     var connectGTMTo = require('ewd-qoper8-gtm');
-    var config = require('ewd-qoper8-gtm/lib/config');
-    config();
-    connectGTMTo(this);
+    connectGTMTo(this, true);
+
+    if (isFirst) {
+      var log = new this.documentStore.DocumentNode('ewdTestLog');
+      log.delete();
+    }
   });
 
   this.on('message', function(messageObj, send, finished) {
@@ -48,9 +51,9 @@ module.exports = function() {
       workerSent: 'hello from worker ' + process.pid,
       time: new Date().toString()
     };
-    var log = new this.globalStore.GlobalNode('ewdTestLog');
-    var ix = log._increment();
-    log.$(ix)._setDocument(results);
+    var log = new this.documentStore.DocumentNode('ewdTestLog');
+    var ix = log.increment();
+    log.$(ix).setDocument(results);
     finished(results);
   });
 
