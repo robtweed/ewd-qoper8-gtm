@@ -1,9 +1,11 @@
 # ewd-qoper8-gtm: Integrates ewd-qoper8 worker modules with the GT.M database
- 
+
+[![Build Status](https://travis-ci.org/killmenot/ewd-qoper8-gtm.svg?branch=tests)](https://travis-ci.org/killmenot/ewd-qoper8-gtm) [![Coverage Status](https://coveralls.io/repos/github/killmenot/ewd-qoper8-gtm/badge.svg?branch=tests)](https://coveralls.io/github/killmenot/ewd-qoper8-gtm?branch=tests)
+
 Rob Tweed <rtweed@mgateway.com>  
 3 March 2016, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com)  
 
-Twitter: @rtweed
+Twitter: [@rtweed](https://twitter.com/rtweed)
 
 Google Group for discussions, support, advice etc: [http://groups.google.co.uk/group/enterprise-web-developer-community](http://groups.google.co.uk/group/enterprise-web-developer-community)
 
@@ -14,6 +16,7 @@ This module may be used to simplifiy the integration of the Open Source GT.M dat
 It additionally loads the ewd-document-store module to provide a very powerful and natural JavaScript interface to the underlying
 Global Storage database engine within GT.M.
 
+
 ## Installing
 
        npm install ewd-qoper8-gtm
@@ -21,8 +24,9 @@ Global Storage database engine within GT.M.
 You also MUST install the Node.js connection interface module for GT.M:
 
        npm install nodem
-	   
+     
 ## Using ewd-qoper8-gtm
+
 
 This module should be used with the start event handler of your ewd-qoper8 worker module, eg:
 
@@ -96,6 +100,7 @@ opening the connection to GT.M, so you could add the following handler in your w
 
 
 The dbClosed and DocumentStoreStarted events provide no arguments.
+
 
 ## Example
 
