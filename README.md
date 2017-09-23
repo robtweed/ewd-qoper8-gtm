@@ -1,6 +1,6 @@
 # ewd-qoper8-gtm: Integrates ewd-qoper8 worker modules with the GT.M database
 
-[![Build Status](https://travis-ci.org/killmenot/ewd-qoper8-gtm.svg?branch=tests)](https://travis-ci.org/killmenot/ewd-qoper8-gtm) [![Coverage Status](https://coveralls.io/repos/github/killmenot/ewd-qoper8-gtm/badge.svg?branch=tests)](https://coveralls.io/github/killmenot/ewd-qoper8-gtm?branch=tests)
+[![Build Status](https://travis-ci.org/killmenot/ewd-qoper8-gtm.svg?branch=tests)](https://travis-ci.org/killmenot/ewd-qoper8-gtm) [![Coverage Status](https://coveralls.io/repos/github/killmenot/ewd-qoper8-gtm/badge.svg?branch=tests)](https://coveralls.io/github/killmenot/ewd-qoper8-gtm?branch=tests) [![Dependency Status](https://gemnasium.com/badges/github.com/killmenot/ewd-qoper8-gtm.svg)](https://gemnasium.com/github.com/killmenot/ewd-qoper8-gtm)
 
 Rob Tweed <rtweed@mgateway.com>  
 3 March 2016, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com)  
