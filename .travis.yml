@@ -4,8 +4,9 @@ language: node_js
 node_js:
   - '8'
 before_install:
+  - pwd
   - sudo apt-get -qq update
-  - wget -q https://downloads.sourceforge.net/project/fis-gtm/GT.M-amd64-Linux/V6.3-002/gtm_V63002_linux_x8664_pro.tar.gz
+  - wget -q https://downloads.sourceforge.net/project/fis-gtm/GT.M-amd64-Linux/V6.3-002/gtm_V63002_linux_x8664_pro.tar.gz -P /home/travis
   - mkdir ~/gtm_V63002_linux_x8664_pro
   - tar zxvf ~/gtm_V63002_linux_x8664_pro.tar.gz -C ~/gtm_V63002_linux_x8664_pro
   - (cd /home/travis/gtm_V63002_linux_x8664_pro && sudo ./gtminstall --distrib /home/travis/gtm_V63002_linux_x8664_pro)
