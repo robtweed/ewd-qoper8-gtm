@@ -24,21 +24,21 @@ describe('unit/setEnvironment:', function () {
     /*jshint sub: true */
     expect(process.env['GTM_REPLICATION']).toBe('off');
     expect(process.env['gtmdir']).toBe('/home/vagrant/.fis-gtm');
-    expect(process.env['gtmver']).toBe('V6.3-002_x86');
-    expect(process.env['gtm_dist']).toBe('/usr/lib/fis-gtm/V6.3-002');
+    expect(process.env['gtmver']).toBe('V6.3-002_x86_64');
+    expect(process.env['gtm_dist']).toBe('/usr/lib/fis-gtm/V6.3-002_x86_64');
     expect(process.env['GTMCI']).toBe('/vagrant/node_modules/nodem/resources/nodem.ci');
-    expect(process.env['gtmgbldir']).toBe('/home/vagrant/.fis-gtm/V6.3-002_x86/g/gtm.gld');
-    expect(process.env['gtmroutines']).toBe('/home/vagrant/.fis-gtm/V6.3-002_x86/o(/home/vagrant/.fis-gtm/V6.3-002_x86/r /home/vagrant/.fis-gtm/r) /usr/lib/fis-gtm/V6.3-002 /vagrant/node_modules/nodem/src');
+    expect(process.env['gtmgbldir']).toBe('/home/vagrant/.fis-gtm/V6.3-002_x86_64/g/gtm.gld');
+    expect(process.env['gtmroutines']).toBe('/home/vagrant/.fis-gtm/V6.3-002_x86_64/o(/home/vagrant/.fis-gtm/V6.3-002_x86_64/r /home/vagrant/.fis-gtm/r) /usr/lib/fis-gtm/V6.3-002_x86_64/libgtmutil.so /usr/lib/fis-gtm/V6.3-002_x86_64 /vagrant/node_modules/nodem/src');
     /*jshint sub: false */
   });
 
-  it('os.arch is not ia32', function () {
-    spyOn(os, 'arch').and.returnValue('x64');
+  it('os.arch is ia32', function () {
+    spyOn(os, 'arch').and.returnValue('ia32');
 
     setEnvironment();
 
     /*jshint sub: true */
-    expect(process.env['gtmroutines']).toBe('/home/vagrant/.fis-gtm/V6.3-002_x86/o(/home/vagrant/.fis-gtm/V6.3-002_x86/r /home/vagrant/.fis-gtm/r) /usr/lib/fis-gtm/V6.3-002/libgtmutil.so /usr/lib/fis-gtm/V6.3-002 /vagrant/node_modules/nodem/src');
+    expect(process.env['gtmroutines']).toBe('/home/vagrant/.fis-gtm/V6.3-002_x86_64/o(/home/vagrant/.fis-gtm/V6.3-002_x86_64/r /home/vagrant/.fis-gtm/r) /usr/lib/fis-gtm/V6.3-002_x86_64 /vagrant/node_modules/nodem/src');
     /*jshint sub: false */
   });
 
