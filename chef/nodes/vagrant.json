@@ -1,0 +1,12 @@
+{
+  "nodejs": {
+    "version": "8.5.0",
+    "install_method": "binary",
+    "binary": {
+      "checksum": "00ea2be3a78b1694439254d9c7232ce79748d5ff3e0d9bb2ff1fcd090d502d63"
+    }
+  },
+  "run_list": [
+    "recipe[nodejs]"
+  ]
+}

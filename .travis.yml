@@ -1,0 +1,26 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+  - '8'
+  - '7'
+  - '6'
+  - '5'
+  - '4'
+  - 'iojs'
+  - '0.12'
+  - '0.11'
+  - '0.10'
+before_install:
+  - sudo apt-get -qq update
+  - wget -q https://downloads.sourceforge.net/project/fis-gtm/GT.M-amd64-Linux/V6.3-002/gtm_V63002_linux_x8664_pro.tar.gz -P /home/travis
+  - mkdir ~/gtm_V63002_linux_x8664_pro
+  - tar zxvf ~/gtm_V63002_linux_x8664_pro.tar.gz -C ~/gtm_V63002_linux_x8664_pro
+  - (cd /home/travis/gtm_V63002_linux_x8664_pro && sudo ./gtminstall --distrib /home/travis/gtm_V63002_linux_x8664_pro)
+  - /usr/lib/fis-gtm/V6.3-002_x86_64/gtmprofile
+  - /usr/lib/fis-gtm/V6.3-002_x86_64/gtmbase
+script:
+  - npm run test:unit
+after_success:
+  - npm run coverage:unit
+  - npm run coveralls
