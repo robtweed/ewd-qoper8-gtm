@@ -1,6 +1,6 @@
 {
   "name": "ewd-qoper8-gtm",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "Integrates the GT.M database with ewd-qoper8 worker processes",
   "license": "Apache-2.0",
   "main": "index.js",
