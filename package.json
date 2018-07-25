@@ -4,6 +4,9 @@
   "description": "Integrates the GT.M database with ewd-qoper8 worker processes",
   "license": "Apache-2.0",
   "main": "index.js",
+  "engines": {
+    "node": ">=4"
+  },
   "author": "Rob Tweed, M/Gateway Developments Ltd",
   "homepage": "https://github.com/robtweed/ewd-qoper8-gtm#readme",
   "repository": {
@@ -35,20 +38,20 @@
     ]
   },
   "dependencies": {
-    "ewd-document-store": "^1.18.0"
+    "ewd-document-store": "^1.23.0"
   },
   "devDependencies": {
     "body-parser": "^1.18.2",
-    "coveralls": "^2.13.1",
-    "dotenv": "^4.0.0",
+    "coveralls": "^3.0.2",
+    "dotenv": "^6.0.0",
     "ewd-qoper8": "^3.16.0",
     "express": "^4.15.5",
-    "jasmine": "^2.8.0",
+    "jasmine": "^3.1.0",
     "jasmine-spec-reporter": "^4.1.1",
     "jshint": "^2.9.5",
     "mockery": "^2.1.0",
     "nodem": "^0.9.2",
-    "nyc": "^11.1.0",
+    "nyc": "^12.0.2",
     "pre-commit": "^1.2.2",
     "supertest": "^3.0.0"
   }

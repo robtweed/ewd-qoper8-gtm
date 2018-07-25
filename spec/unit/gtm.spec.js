@@ -83,7 +83,7 @@ describe('unit/gtm:', function () {
 
       worker.emit('stop');
 
-      expect(db.close).toHaveBeenCalled();
+      expect(db.close).toHaveBeenCalledWith({resetTerminal: true});
       expect(spy).toHaveBeenCalled();
     });
   });
@@ -103,7 +103,7 @@ describe('unit/gtm:', function () {
 
       worker.emit('unexpectedError');
 
-      expect(db.close).toHaveBeenCalled();
+      expect(db.close).toHaveBeenCalledWith({resetTerminal: true});
     });
 
     it('handle unexpected error when db is not initialized', function () {
@@ -138,20 +138,37 @@ describe('unit/gtm:', function () {
   });
 
   describe('environment', function () {
-    it('environment.nodem', function () {
-      var customDb = gtmMock.mock();
-      var CustomGtm = jasmine.createSpy().and.returnValue(customDb);
-      mockery.registerMock('/path/to/nodem', {
-        Gtm: CustomGtm
+    describe('open_params', function () {
+      it('should call db.open with correct params', function () {
+        var openParams = {foo: 'bar'};
+        /*jshint camelcase: false */
+        var environment = {
+          open_params: openParams
+        };
+        /*jshint camelcase: true */
+
+        gtm(worker, environment);
+
+        expect(worker.db.open).toHaveBeenCalledWith(openParams);
       });
+    });
 
-      var environment = {
-        nodem: '/path/to/nodem'
-      };
+    describe('nodem', function () {
+      it('should use custom path to nodem', function () {
+        var customDb = gtmMock.mock();
+        var CustomGtm = jasmine.createSpy().and.returnValue(customDb);
+        mockery.registerMock('/path/to/nodem', {
+          Gtm: CustomGtm
+        });
 
-      gtm(worker, environment);
+        var environment = {
+          nodem: '/path/to/nodem'
+        };
 
-      expect(worker.db).toBe(customDb);
+        gtm(worker, environment);
+
+        expect(worker.db).toBe(customDb);
+      });
     });
 
     it('should set environment', function () {
