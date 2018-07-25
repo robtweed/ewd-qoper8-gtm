@@ -70,4 +70,22 @@ describe('unit/setEnvironment:', function () {
     expect(process.env['gtmroutines']).toBe('/tmp/gtmdir/V6.3-002_x86/o(/tmp/gtmdir/V6.3-002_x86/r /tmp/gtmdir/r) /usr/local/lib/fis-gtm/V6.3-002 ' + DIR + '/node_modules/nodem/src');
     /*jshint sub: false */
   });
+
+  it('should set environment variables from params.ydb_env', function () {
+    /*jshint camelcase: false */
+    var params = {
+      ydb_env: {
+        ydb_retention: 42,
+        ydb_log: '/tmp/yottadb/r1.22_x86_64'
+      }
+    };
+    /*jshint camelcase: true */
+
+    setEnvironment(params);
+
+     /*jshint sub: true */
+    expect(process.env['ydb_retention']).toBe('42');
+    expect(process.env['ydb_log']).toBe('/tmp/yottadb/r1.22_x86_64');
+    /*jshint sub: false */
+  });
 });
